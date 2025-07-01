@@ -13,6 +13,7 @@ Maven
 JUnit 5 & Mockito
 
 📁 Estructura del Proyecto
+\```
 src/
 ├── main/
 │   ├── java/com/pinapp/cliente_microservice/
@@ -42,19 +43,21 @@ src/
         │   └── ClienteServiceTest.java      # Tests unitarios service
         └── integration/
             └── ClienteIntegrationTest.java  # Tests de integración
-
+\```
 🔌 API Endpoints
 1. Crear Cliente
 POST /creacliente
 Content-Type: application/json
-
+\```
 {
   "nombre": "Juan",
   "apellido": "Pérez",
   "edad": 30,
   "fechaNacimiento": "1994-01-15"
 }
+\```
 Response: 201 Created
+\```
 {
   "id": 1,
   "nombre": "Juan",
@@ -62,17 +65,20 @@ Response: 201 Created
   "edad": 30,
   "fechaNacimiento": "1994-01-15"
 }
-2. Obtener KPIs de Clientes
+\```
+3. Obtener KPIs de Clientes
 GET /kpideclientes
 Response: 200 OK
-json{
+\```
+{
   "promedioEdad": 35.5,
   "desviacionEstandar": 12.3
 }
-3. Listar Clientes
+\```
+5. Listar Clientes
 GET /listclientes
 Response: 200 OK
-
+\```
   {
     "id": 1,
     "nombre": "Juan",
@@ -80,7 +86,8 @@ Response: 200 OK
     "edad": 30,
     "fechaNacimiento": "1994-01-15",
     "fechaProbableMuerte": "2064-01-15"
-  }
+}
+\```
 ⚙️ Configuración
 Desarrollo Local
 
@@ -90,7 +97,7 @@ bashgit clone https://github.com/bguzmanech/cliente-microservice-backend.git
 cd cliente-microservice-backend
 
 Configuración de la base de datos (application.yml):
-
+\```
 yamlspring:
   datasource:
     url: jdbc:h2:mem:testdb
@@ -105,7 +112,7 @@ yamlspring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
-
+\```
 Ejecutar la aplicación:
 
 bashmvn clean install
@@ -158,7 +165,8 @@ Dominio personalizado requerido (Route 53)
 
 🔧 Configuración CORS
 CORS está configurado para permitir requests del frontend:
-java@Configuration
+\```
+@Configuration
 public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -170,7 +178,7 @@ public class CorsConfig implements WebMvcConfigurer {
                 .maxAge(3600);
     }
 }
-
+\```
 📊 Modelo de Datos
 Entidad Cliente
 java@Entity
@@ -218,13 +226,15 @@ private LocalDate calcularFechaProbableMuerte(Integer edadActual) {
 
 🐛 Manejo de Errores
 Respuestas estandarizadas:
-json{
+\```
+{
   "timestamp": "2024-01-15T10:30:00",
   "status": 400,
   "error": "Bad Request",
   "message": "La edad debe ser mayor a 0",
   "path": "/creacliente"
 }
+\```
 🤝 Frontend
 Este backend está diseñado para trabajar con el frontend Angular disponible en:
 cliente-microservice-frontend
