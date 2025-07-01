@@ -2,10 +2,17 @@ spring:
   application:
     name: cliente-microservice
 
-  # db PostgreSQL para deploy en prd
+  # db h2 en memoria para prd
   datasource:
-    url: ${DATABASE_URL}
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:proddb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
 
   jpa:
     hibernate:
