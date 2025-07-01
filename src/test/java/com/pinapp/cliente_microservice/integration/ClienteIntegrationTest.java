@@ -64,15 +64,15 @@ class ClienteIntegrationTest {
 
     @Test
     void testKpisConVariosClientes() throws Exception {
-        Cliente cliente1 = new Cliente("Ana", "López", 25, LocalDate.of(1999, 1, 1));
-        Cliente cliente2 = new Cliente("Carlos", "Ruiz", 35, LocalDate.of(1989, 1, 1));
+        Cliente cliente1 = new Cliente("Lionel", "Messi", 38, LocalDate.of(1987, 6, 24));
+        Cliente cliente2 = new Cliente("Angel", "Di Maria", 37, LocalDate.of(1988, 2, 14));
 
         clienteRepository.save(cliente1);
         clienteRepository.save(cliente2);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/kpideclientes"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.promedioEdad").value(30.0))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.promedioEdad").value(37.5))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.desviacionEstandar").exists());
     }
 
